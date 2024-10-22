@@ -8,4 +8,5 @@ export {
   getEmployees,
   saveEmployee,
   updateEmployee,
+  deleteEmployee,
 } from "./employee.service";
