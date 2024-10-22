@@ -9,4 +9,5 @@ export {
   getEmployeesController,
   saveEmployeeController,
   updateEmployeeController,
+  deleteEmployeeController,
 } from "./employee.controller";
