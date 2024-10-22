@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import departmentRoutes from "@routes/department.routes";
+import { departmentRoutes, employeeRoutes } from "@routes";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -19,9 +19,12 @@ app.use(express.json());
 // Department
 app.use(`/api/${API_VERSION}/department`, departmentRoutes);
 
+// Employee
+app.use(`/api/${API_VERSION}/employee`, employeeRoutes);
+
 // Health check
 app.get(`/api/${API_VERSION}/hello`, (req, res) => {
-  res.send("Hello World!");
+  res.json({ message: "Hello from the server!" });
 });
 
 // Start server

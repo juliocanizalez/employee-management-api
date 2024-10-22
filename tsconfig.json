@@ -10,12 +10,12 @@
     "outDir": "./build",
     "strict": true,
     "paths": {
-      "@controllers": ["controllers/department.controller.ts"],
-      "@services": ["services/department.service.ts"],
-      "@validators": ["validators/department.validator.ts"],
-      "@routes/*": ["routes/department.routes.ts"],
+      "@controllers": ["controllers/index.ts"],
+      "@services": ["services/index.ts"],
+      "@validators": ["validators/index.ts"],
+      "@routes": ["routes/index.ts"],
       "@config": ["config/prisma.ts"],
-      "@middlewares": ["middlewares/handleValidationErrors.ts"]
+      "@middlewares": ["middlewares/index.ts"]
     },
     "typeRoots": ["./node_modules/@types", "./src/types"]
   },
