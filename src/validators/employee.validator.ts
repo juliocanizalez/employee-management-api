@@ -14,7 +14,7 @@ export const validateEmployee = [
   body("hireDate")
     .notEmpty()
     .withMessage("Hire date is required")
-    .isDate()
+    .isISO8601()
     .withMessage("Hire date must be a valid date"),
   body("phone")
     .notEmpty()
