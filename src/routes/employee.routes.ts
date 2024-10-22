@@ -4,6 +4,7 @@ import {
   getEmployeesController,
   saveEmployeeController,
   updateEmployeeController,
+  deleteEmployeeController,
 } from "@controllers";
 import { validateEmployee } from "@validators";
 import { handleValidationErrors } from "@middlewares";
@@ -16,8 +17,9 @@ router.post(
   "/",
   validateEmployee,
   handleValidationErrors as NextFunction,
-  saveEmployeeController,
+  saveEmployeeController
 );
 router.put("/:id", updateEmployeeController);
+router.delete("/:id", deleteEmployeeController);
 
 export default router;
