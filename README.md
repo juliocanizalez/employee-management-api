@@ -2,6 +2,10 @@
 
 This is a simple API to maintain employee information.
 
+## Database diagram
+
+![Database diagram](https://res.cloudinary.com/dqaav1s3t/image/upload/v1729619275/samples/arysepmhgcfpiqypdbj4.png)
+
 ## API Documentation
 
 The API documentation is available at [https://www.postman.com/juliocanizalez/employee-management/overview](https://www.postman.com/juliocanizalez/employee-management/overview)
