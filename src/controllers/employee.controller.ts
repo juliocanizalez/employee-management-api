@@ -4,6 +4,7 @@ import {
   getEmployees,
   saveEmployee,
   updateEmployee,
+  deleteEmployee,
 } from "@services";
 
 export const getEmployeeController = async (req: Request, res: Response) => {
@@ -11,10 +12,13 @@ export const getEmployeeController = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     const employee = await getEmployee(id);
-
+    if (employee === null) {
+      res.status(404).json({ message: "Employee not found" });
+      return;
+    }
     res.status(200).json(employee);
   } catch (error) {
-    res.status(404).json({ message: "Employee not found", details: error });
+    res.status(500).json({ message: "Internal server error", details: error });
   }
 };
 
@@ -64,6 +68,19 @@ export const updateEmployeeController = async (req: Request, res: Response) => {
       address,
       departmentId,
     });
+
+    res.status(200).json(employee);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error", details: error });
+  }
+};
+
+export const deleteEmployeeController = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const employee = await deleteEmployee(id);
 
     res.status(200).json(employee);
   } catch (error) {
