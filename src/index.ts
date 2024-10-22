@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import departmentRoutes from "@routes/department.routes";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -11,7 +12,14 @@ const API_VERSION = process.env.API_VERSION || "v1";
 
 const app = express();
 
+// Middleware
+app.use(express.json());
+
 // ROUTES
+// Department
+app.use(`/api/${API_VERSION}/department`, departmentRoutes);
+
+// Health check
 app.get(`/api/${API_VERSION}/hello`, (req, res) => {
   res.send("Hello World!");
 });
