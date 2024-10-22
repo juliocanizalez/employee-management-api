@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { validationResult } from "express-validator";
 import { getDepartment, getDepartments, saveDepartment } from "@services";
 
 export const getDepartmentController = async (req: Request, res: Response) => {
@@ -25,13 +24,6 @@ export const getDepartmentsController = async (req: Request, res: Response) => {
 };
 
 export const saveDepartmentController = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res
-      .status(400)
-      .json({ message: "Bad request", details: errors.array() });
-  }
-
   try {
     const { name } = req.body;
 
