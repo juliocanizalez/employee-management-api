@@ -58,3 +58,14 @@ export const updateEmployee = async (employee: Employee) => {
 
   return updatedEmployee;
 };
+
+export const deleteEmployee = async (id: string) => {
+  console.log("hoa?");
+  const deletedEmployee = await prisma.employee.delete({
+    where: {
+      id,
+    },
+  });
+
+  return deletedEmployee;
+};
