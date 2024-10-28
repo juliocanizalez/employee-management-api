@@ -2,7 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { corsOptions } from "@config";
-import { departmentRoutes, employeeRoutes } from "@routes";
+import {
+  departmentRoutes,
+  employeeRoutes,
+  employeeDepartmentRoutes,
+} from "@routes";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -25,6 +29,9 @@ app.use(`/api/${API_VERSION}/department`, departmentRoutes);
 
 // Employee
 app.use(`/api/${API_VERSION}/employee`, employeeRoutes);
+
+// Employee Department
+app.use(`/api/${API_VERSION}/employee/department`, employeeDepartmentRoutes);
 
 // Health check
 app.get(`/api/${API_VERSION}/hello`, (req, res) => {
