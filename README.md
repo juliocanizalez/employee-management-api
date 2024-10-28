@@ -4,7 +4,7 @@ This is a simple API to maintain employee information.
 
 ## Database diagram
 
-![Database diagram](https://res.cloudinary.com/dqaav1s3t/image/upload/v1729619275/samples/arysepmhgcfpiqypdbj4.png)
+![Database diagram](https://res.cloudinary.com/dqaav1s3t/image/upload/v1730087615/samples/gkgqc9socuohahrij8zz.png)
 
 ## API Documentation
 
