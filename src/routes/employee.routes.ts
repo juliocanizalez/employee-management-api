@@ -5,6 +5,8 @@ import {
   saveEmployeeController,
   updateEmployeeController,
   deleteEmployeeController,
+  activateEmployeeController,
+  deactivateEmployeeController,
 } from "@controllers";
 import { validateEmployee } from "@validators";
 import { handleValidationErrors } from "@middlewares";
@@ -21,5 +23,7 @@ router.post(
 );
 router.put("/:id", updateEmployeeController);
 router.delete("/:id", deleteEmployeeController);
+router.patch("/:id/activate", activateEmployeeController);
+router.patch("/:id/deactivate", deactivateEmployeeController);
 
 export default router;
