@@ -12,4 +12,4 @@ export {
   deleteEmployeeController,
 } from "./employee.controller";
 
-export { getEmployeeDepartmentController } from "./emplyee-department.controller";
+export { getEmployeeDepartmentController } from "./employee-department.controller";
