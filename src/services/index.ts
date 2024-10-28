@@ -9,6 +9,6 @@ export {
   saveEmployee,
   updateEmployee,
   deleteEmployee,
+  activateEmployee,
+  deactivateEmployee,
 } from "./employee.service";
-
-export { getEmployeeDepartment } from "./employee-department.service";
