@@ -10,6 +10,6 @@ export {
   saveEmployeeController,
   updateEmployeeController,
   deleteEmployeeController,
+  activateEmployeeController,
+  deactivateEmployeeController,
 } from "./employee.controller";
-
-export { getEmployeeDepartmentController } from "./employee-department.controller";

@@ -5,13 +5,15 @@ import {
   saveEmployee,
   updateEmployee,
   deleteEmployee,
+  activateEmployee,
+  deactivateEmployee,
 } from "@services";
 
 export const getEmployeeController = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const employee = await getEmployee(id);
+    const employee = await getEmployee(Number(id));
     if (employee === null) {
       res.status(404).json({ message: "Employee not found" });
       return;
@@ -37,13 +39,14 @@ export const saveEmployeeController = async (req: Request, res: Response) => {
     const { firstName, lastName, hireDate, phone, address, departmentId } =
       req.body;
 
+    const departmentIdNumber = Number(departmentId);
     const employee = await saveEmployee({
       firstName,
       lastName,
       hireDate,
       phone,
       address,
-      departmentId,
+      departmentId: departmentIdNumber,
     });
 
     res.status(201).json(employee);
@@ -59,8 +62,10 @@ export const updateEmployeeController = async (req: Request, res: Response) => {
     const { firstName, lastName, hireDate, phone, address, departmentId } =
       req.body;
 
+    const idNumber = Number(id);
+
     const employee = await updateEmployee({
-      id,
+      id: idNumber,
       firstName,
       lastName,
       hireDate,
@@ -80,7 +85,39 @@ export const deleteEmployeeController = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const employee = await deleteEmployee(id);
+    const employee = await deleteEmployee(Number(id));
+
+    res.status(200).json(employee);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error", details: error });
+  }
+};
+
+export const activateEmployeeController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { id } = req.params;
+
+    const employee = await activateEmployee(Number(id));
+
+    res.status(200).json(employee);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error", details: error });
+  }
+};
+
+export const deactivateEmployeeController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { id } = req.params;
+
+    const employee = await deactivateEmployee(Number(id));
 
     res.status(200).json(employee);
   } catch (error) {
