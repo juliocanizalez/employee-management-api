@@ -1,4 +1,4 @@
-import prisma from "@config";
+import { prisma } from "@config";
 import { Department } from "types/department.type";
 
 export const getDepartment = async (id: string) => {
