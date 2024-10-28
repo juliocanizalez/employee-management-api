@@ -14,6 +14,9 @@ export const getEmployeeDepartment = async (id: string) => {
     where: {
       employeeId: id,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return employeeDepartment;
