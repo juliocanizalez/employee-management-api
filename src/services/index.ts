@@ -10,3 +10,5 @@ export {
   updateEmployee,
   deleteEmployee,
 } from "./employee.service";
+
+export { getEmployeeDepartment } from "./employee-department.service";
