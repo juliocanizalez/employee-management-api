@@ -36,4 +36,5 @@ model EmployeeDepartmentHistory {
   employeeId   String     @map("employee_id")
   department   Department @relation(fields: [departmentId], references: [id])
   departmentId String     @map("department_id")
+  createdAt    DateTime   @default(now()) @map("created_at")
 }
