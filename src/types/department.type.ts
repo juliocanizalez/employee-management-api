@@ -1,5 +1,5 @@
 export interface Department {
-  id?: string;
+  id?: number;
   name: string;
   _count?: {
     Employee: number;
