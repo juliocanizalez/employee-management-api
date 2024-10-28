@@ -8,18 +8,32 @@ datasource db {
 }
 
 model Employee {
-  id           String     @id @default(uuid())
-  firstName    String     @map("first_name")
-  lastName     String     @map("last_name")
-  hireDate     DateTime   @map("hire_date")
-  phone        String
-  address      String
-  Department   Department @relation(fields: [departmentId], references: [id])
-  departmentId String     @map("department_id")
+  id                        String                      @id @default(uuid())
+  firstName                 String                      @map("first_name")
+  lastName                  String                      @map("last_name")
+  hireDate                  DateTime                    @map("hire_date")
+  phone                     String
+  address                   String
+  Department                Department                  @relation(fields: [departmentId], references: [id])
+  departmentId              String                      @map("department_id")
+  createdAt                 DateTime                    @default(now()) @map("created_at")
+  updatedAt                 DateTime                    @updatedAt @map("updated_at")
+  EmployeeDepartmentHistory EmployeeDepartmentHistory[]
 }
 
 model Department {
-  id       String     @id @default(uuid())
-  name     String
-  Employee Employee[]
+  id                        String                      @id @default(uuid())
+  name                      String
+  createdAt                 DateTime                    @default(now()) @map("created_at")
+  updatedAt                 DateTime                    @updatedAt @map("updated_at")
+  Employee                  Employee[]
+  EmployeeDepartmentHistory EmployeeDepartmentHistory[]
+}
+
+model EmployeeDepartmentHistory {
+  id           String     @id @default(uuid())
+  employee     Employee   @relation(fields: [employeeId], references: [id])
+  employeeId   String     @map("employee_id")
+  department   Department @relation(fields: [departmentId], references: [id])
+  departmentId String     @map("department_id")
 }
