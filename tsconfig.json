@@ -14,7 +14,7 @@
       "@services": ["services/index.ts"],
       "@validators": ["validators/index.ts"],
       "@routes": ["routes/index.ts"],
-      "@config": ["config/prisma.ts"],
+      "@config": ["config/index.ts"],
       "@middlewares": ["middlewares/index.ts"]
     },
     "typeRoots": ["./node_modules/@types", "./src/types"]
