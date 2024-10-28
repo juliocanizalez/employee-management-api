@@ -1,5 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
+import { corsOptions } from "@config";
 import { departmentRoutes, employeeRoutes } from "@routes";
 
 // Load environment variables from .env file
@@ -13,7 +15,9 @@ const API_VERSION = process.env.API_VERSION || "v1";
 const app = express();
 
 // Middleware
+app.options("*", cors(corsOptions));
 app.use(express.json());
+app.use(cors(corsOptions));
 
 // ROUTES
 // Department
