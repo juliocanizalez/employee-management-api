@@ -1,7 +1,7 @@
 import { prisma } from "@config";
 import { Employee } from "types/employee.type";
 
-export const getEmployee = async (id: string) => {
+export const getEmployee = async (id: number) => {
   const employee = await prisma.employee.findUnique({
     where: {
       id,
@@ -13,10 +13,25 @@ export const getEmployee = async (id: string) => {
       hireDate: true,
       phone: true,
       address: true,
+      imageUrl: true,
       departmentId: true,
+      isActive: true,
       Department: {
         select: {
           name: true,
+        },
+      },
+      EmployeeDepartmentHistory: {
+        select: {
+          department: {
+            select: {
+              name: true,
+            },
+          },
+          createdAt: true,
+        },
+        orderBy: {
+          createdAt: "desc",
         },
       },
     },
@@ -32,6 +47,7 @@ export const getEmployees = async () => {
       firstName: true,
       lastName: true,
       hireDate: true,
+      imageUrl: true,
       phone: false,
       address: false,
       Department: {
@@ -52,6 +68,9 @@ export const saveEmployee = async (employee: Employee) => {
     },
   });
 
+  // Save into history table
+  saveHistory(newEmployee);
+
   return newEmployee;
 };
 
@@ -65,15 +84,66 @@ export const updateEmployee = async (employee: Employee) => {
     },
   });
 
+  // Save into history table
+  saveHistory(updatedEmployee);
+
   return updatedEmployee;
 };
 
-export const deleteEmployee = async (id: string) => {
-  const deletedEmployee = await prisma.employee.delete({
+export const deleteEmployee = async (id: number) => {
+  const result = await prisma.$transaction(async (tx) => {
+    await tx.employeeDepartmentHistory.deleteMany({
+      where: {
+        employeeId: id,
+      },
+    });
+
+    const deletedEmployee = await tx.employee.delete({
+      where: {
+        id,
+      },
+      include: {
+        Department: true,
+      },
+    });
+
+    return deletedEmployee;
+  });
+
+  return result;
+};
+
+export const activateEmployee = async (id: number) => {
+  const activatedEmployee = await prisma.employee.update({
     where: {
       id,
     },
+    data: {
+      isActive: true,
+    },
   });
 
-  return deletedEmployee;
+  return activatedEmployee;
+};
+
+export const deactivateEmployee = async (id: number) => {
+  const deactivatedEmployee = await prisma.employee.update({
+    where: {
+      id,
+    },
+    data: {
+      isActive: false,
+    },
+  });
+
+  return deactivatedEmployee;
+};
+
+const saveHistory = async (employee: Employee) => {
+  await prisma.employeeDepartmentHistory.create({
+    data: {
+      employeeId: employee.id!,
+      departmentId: employee.departmentId,
+    },
+  });
 };

@@ -1,7 +1,7 @@
 import { prisma } from "@config";
 import { Department } from "types/department.type";
 
-export const getDepartment = async (id: string) => {
+export const getDepartment = async (id: number) => {
   const department = await prisma.department.findUnique({
     where: {
       id,
@@ -34,14 +34,4 @@ export const getDepartments = async () => {
   });
 
   return departments;
-};
-
-export const saveDepartment = async (department: Department) => {
-  const newDepartment = await prisma.department.create({
-    data: {
-      name: department.name,
-    },
-  });
-
-  return newDepartment;
 };
