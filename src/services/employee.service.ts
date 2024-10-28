@@ -1,4 +1,4 @@
-import prisma from "@config";
+import { prisma } from "@config";
 import { Employee } from "types/employee.type";
 
 export const getEmployee = async (id: string) => {
@@ -14,6 +14,11 @@ export const getEmployee = async (id: string) => {
       phone: true,
       address: true,
       departmentId: true,
+      Department: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 
@@ -27,9 +32,13 @@ export const getEmployees = async () => {
       firstName: true,
       lastName: true,
       hireDate: true,
-      phone: true,
-      address: true,
-      departmentId: true,
+      phone: false,
+      address: false,
+      Department: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 
@@ -60,7 +69,6 @@ export const updateEmployee = async (employee: Employee) => {
 };
 
 export const deleteEmployee = async (id: string) => {
-  console.log("hoa?");
   const deletedEmployee = await prisma.employee.delete({
     where: {
       id,
